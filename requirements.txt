@@ -4,3 +4,8 @@ numpy
 opencv-python-headless
 pytesseract
 tensorflow==2.16.2
+ultralytics
+matplotlib
+seaborn
+torch
+ipywidgets
