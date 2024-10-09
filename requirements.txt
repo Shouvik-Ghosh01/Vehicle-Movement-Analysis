@@ -1,7 +1,7 @@
 streamlit
 pandas
 numpy
-opencv-python-headless
+opencv-python==4.10.0.84
 pytesseract
 tensorflow==2.16.2
 ultralytics
