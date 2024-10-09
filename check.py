@@ -1,2 +1,7 @@
-import sys
-sys.path.append('c:\\users\\kiit\\appdata\\local\\packages\\pythonsoftwarefoundation.python.3.9_qbz5n2kfra8p0\\localcache\\local-packages\\python39\\site-packages')
+import tensorflow as tf
+
+try:
+    from tensorflow.lite.python.interpreter import Interpreter
+    print("TensorFlow Lite imported successfully!")
+except ImportError:
+    print("Error importing TensorFlow Lite")
