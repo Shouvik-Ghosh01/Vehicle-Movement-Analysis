@@ -3,3 +3,4 @@ pandas
 numpy
 opencv-python-headless
 pytesseract
+tensorflow==2.16.2
