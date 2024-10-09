@@ -1,4 +1,5 @@
 import streamlit as st
+import pytesseract
 
 st.set_page_config(
     page_title="Vehicle Registration and Monitoring App",

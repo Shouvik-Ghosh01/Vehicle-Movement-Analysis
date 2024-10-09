@@ -61,10 +61,10 @@ for i in range(num_days):
         # Record the usage of the slot
         slot_usage[available_slot].append((in_time, out_time))
         # Add the data entry
-        data.append([vehicle_number, in_time.strftime('%d-%m-%Y %H:%M:%S'), out_time.strftime('%d-%m-%Y %H:%M:%S'),
+        data.append([vehicle_number, in_time.strftime('%m-%d-%Y %H:%M:%S'), out_time.strftime('%m-%d-%Y %H:%M:%S'),
                      available_slot])
 # Write data to CSV file
-csv_filename = 'indian_vehicle_parking_data_30_days_with_different_dates.csv'
+csv_filename = 'datasets/indian_vehicle_parking_data.csv'
 with open(csv_filename, mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['Vehicle Number', 'In Time', 'Out Time', 'Slot Number'])

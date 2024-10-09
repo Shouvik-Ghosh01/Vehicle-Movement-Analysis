@@ -20,7 +20,7 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\\tesser
 modelpath = 'detect.tflite'
 lblpath = 'labelmap.txt'
 min_conf = 0.99
-cap = cv2.VideoCapture('demo.mp4')
+cap = cv2.VideoCapture('datasets/demo.mp4')
 
 interpreter = Interpreter(model_path=modelpath)
 interpreter.allocate_tensors()
@@ -37,11 +37,11 @@ input_std = 127.5
 list1 = []
 processed_numbers = set()
 
-with open("car_plate_data.csv", "a", newline='') as csvfile:
+with open("datasets/car_plate_data.csv", "a", newline='') as csvfile:
 
-    # Check if the file is empty (assuming you only want headers on the first write)
-    csvfile.seek(0, 2)  # Move the file pointer to the end
-    if csvfile.tell() == 0:  # Check if the file is empty
+
+    csvfile.seek(0, 2)
+    if csvfile.tell() == 0:
         writer = csv.writer(csvfile)
         writer.writerow(["NumberPlate", "Timestamp"])
 
@@ -54,30 +54,29 @@ while (True):
     imH, imW, _ = frame.shape
     image_resized = cv2.resize(image_rgb, (width, height))
     input_data = np.expand_dims(image_resized, axis=0)
-    # Normalize pixel values if using a floating model (i.e. if model is non-quantized)
+
     if float_input:
         input_data = (np.float32(input_data) - input_mean) / input_std
 
-    # Perform the actual detection by running the model with the image as input
+
     interpreter.set_tensor(input_details[0]['index'], input_data)
     interpreter.invoke()
 
-    boxes = interpreter.get_tensor(output_details[1]['index'])[0]  # Bounding box coordinates of detected objects
-    classes = interpreter.get_tensor(output_details[3]['index'])[0]  # Class index of detected objects
-    scores = interpreter.get_tensor(output_details[0]['index'])[0]  # Confidence of detected objects
+    boxes = interpreter.get_tensor(output_details[1]['index'])[0]
+    classes = interpreter.get_tensor(output_details[3]['index'])[0]
+    scores = interpreter.get_tensor(output_details[0]['index'])[0]
 
     detections = []
 
     for i in range(len(scores)):
         if ((scores[i] > min_conf) and (scores[i] <= 1.0)):
-            # Get bounding box coordinates and draw box
-            # Interpreter can return coordinates that are outside of image dimensions, need to force them to be within image using max() and min()
+
             ymin = int(max(1, (boxes[i][0] * imH)))
             xmin = int(max(1, (boxes[i][1] * imW))+25)
             ymax = int(min(imH, (boxes[i][2] * imH)))
             xmax = int(min(imW, (boxes[i][3] * imW)))
             cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (10, 255, 0), 2)
-            # Draw label
+
             object_name = labels[int(classes[i])]  # Look up object name from "labels" array using class index
             label = '%s: %d%%' % (object_name, int(scores[i] * 100))  # Example: 'person: 72%'
             labelSize, baseLine = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)  # Get font size
@@ -100,10 +99,10 @@ while (True):
                 current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
                 # Open the CSV file in append mode
-                with open("car_plate_data.csv", "a", newline='') as csvfile:
-                    # Create a CSV writer object
+                with open("datasets/car_plate_data.csv", "a", newline='') as csvfile:
+
                     writer = csv.writer(csvfile)
-                    # Write the data as a list (assuming text and current_datetime are strings)
+
                     writer.writerow([text, current_datetime])
 
                 cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0, 255, 0), 1)

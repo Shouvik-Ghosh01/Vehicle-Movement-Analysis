@@ -27,6 +27,7 @@ float_input = (input_details[0]['dtype'] == np.float32)
 
 input_mean = 127.5
 input_std = 127.5
+min_conf = 0.99
 
 def run(image):
     """
@@ -76,4 +77,4 @@ def run(image):
             text = pytesseract.image_to_string(roi, config='-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 8 --oem 3')
             detected_texts.append(text)  # Append detected text to the list
 
-    return image, detected_texts
+    return detected_texts
