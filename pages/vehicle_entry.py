@@ -149,76 +149,7 @@ def main():
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
-        
-    # GitHub link and icon using HTML and CSS for styling
-    github_link = "https://github.com/roysammy123/Vehicle-Movement-Analysis-and-Insight-Generation-Intel-Unnati-Industrial-Program"
-    github_icon = "https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/github.svg"
 
-    # Contributors section
-    contributors = [
-        {"name": "Soumyajit Roy", "github": "https://github.com/roysammy123"},
-        {"name": "Manav Malhotra", "github": "https://github.com/Manav173"},
-        {"name": "Ishtaj Kaur Deol", "github": "https://github.com/Ishtaj"},
-        {"name": "Swarnav Kumar", "github": "https://github.com/Swarnav-Kumar"}
-    ]
-
-    contributors_html = " ".join([
-        f'<a href="{contributor["github"]}" target="_blank" class="contributor-button">{contributor["name"]}</a>'
-        for contributor in contributors
-    ])
-
-    github_link = "https://github.com"  # Replace with your GitHub repository link
-    github_icon = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"  # GitHub icon URL
-
-    st.markdown(f"""
-    <style>
-    .github-link {{
-        display: inline-block;
-        background-color: #A239CA;
-        color: #ffffff !important;
-        padding: 10px 20px;
-        font-size: 18px;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center;
-    }}
-    .github-link img {{
-        vertical-align: middle;
-        margin-left: 10px;
-    }}
-    .contributor-button {{
-        display: inline-block;
-        background-color: #4717F6;
-        padding: 8px 16px;
-        font-size: 14px;
-        text-decoration: none;
-        border-radius: 5px;
-        margin: 8px 8px;
-        margin-bottom: 0;  /* Remove bottom margin */
-    }}
-    .contributor-button:hover {{
-        background-color: #0056b3;
-    }}
-    .contributor-button:visited,
-    .contributor-button:active,
-    .contributor-button:focus {{
-        color: #ffffff;
-        text-decoration: none;
-    }}
-    </style>
-
-    <p style='text-align: center; margin-top: 32px'>
-    <a href="{github_link}" target="_blank" class="github-link">
-        View on GitHub <img src="{github_icon}" alt="GitHub" width="20" height="20">
-    </a>
-    </p>
-    <br>
-
-    <div style="text-align: center; margin-top: 16px;">
-        <p style="font-size: 16px;"><b>Contributors:</b></p>
-        <div style="display: inline-block;">{contributors_html}</div>
-    </div>
-    """, unsafe_allow_html=True)
 
 
 if __name__ == '__main__':

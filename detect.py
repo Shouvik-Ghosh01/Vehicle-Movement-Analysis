@@ -38,7 +38,7 @@ def run(image):
     image (ndarray): Image array in BGR format (OpenCV).
 
     Returns:
-    tuple: A tuple containing the processed image and a list of detected texts.
+    tuple: A tuple containing the processed image with bounding boxes and a list of detected texts.
     """
 
     # Resize and preprocess the image
@@ -77,4 +77,5 @@ def run(image):
             text = pytesseract.image_to_string(roi, config='-c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 8 --oem 3')
             detected_texts.append(text)  # Append detected text to the list
 
-    return detected_texts
+    # Return both the modified image with bounding boxes and the detected texts
+    return image, detected_texts
